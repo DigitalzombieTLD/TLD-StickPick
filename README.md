@@ -16,8 +16,8 @@ You can find everything on: https://xpazeman.com/tld-mod-list/
 
 5. Start the game! 
 
-=============================================
-=============================================
+===========================
+===========================
 
 What does it do?
 =================
@@ -28,14 +28,14 @@ You can configure the size of the radius,
 the calorie penalty for picking up items,
 and choose if only sticks / stones or both get picked up.
 
-=============================================
-=============================================
+===========================
+===========================
 
 BUGS ARE TO BE EXPECTED!!!
 ===========================
 
 Keep yourself up to date on the progress on:
-https://www.youtube.com/channel/UCYRu_uDOzozbXIXKGrznHxQ
+https://www.youtube.com/c/DigitalzombieDev
 
 Or on the TLD reddit:
 https://www.reddit.com/r/thelongdark/
@@ -43,8 +43,8 @@ https://www.reddit.com/r/thelongdark/
 Or on Discord:
 https://discord.gg/AqpW9TjUfr
 
-=============================================
-=============================================
+===========================
+===========================
 
 Changelog:
 ==========
