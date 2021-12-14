@@ -22,18 +22,25 @@ namespace StickPick
 
 		[Name("Pickup radius")]
 		[Description("Choose the radius (sphere) around the player which gets searched for objects")]
-		[Slider(0f, 8f)]
+		[Slider(0f, 15f)]
 		public float pickupRadius = 2.0f;
 
 		[Name("Pickup calorie cost")]
 		[Description("Calorie penalty for picking up a single stick/stone (multiplied if more than one items gets picked up)")]
 		[Slider(0, 25)]
-		public int calorieCost = 10;
+		public int calorieCost = 5;
+
+		[Section("Additional items")]
+
+		[Name("Enable custom item list")]
+		[Description("Picks up any (valid) item listed in the StickPickCustomList.txt")]
+		public bool pickUpAdditionalItems = false;
 
 		protected override void OnConfirm()
         {
             base.OnConfirm();
-        }
+			StickPick_Main.loadCustomItemList();
+		}
     }
 
     internal static class Settings
@@ -44,6 +51,7 @@ namespace StickPick
         {
             options = new StickPickSettingsMain();
             options.AddToModSettings("StickPick Settings");
-        }
+			StickPick_Main.loadCustomItemList();
+		}
     }
 }

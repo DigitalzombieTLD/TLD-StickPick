@@ -8,6 +8,8 @@ using System.Globalization;
 using UnhollowerRuntimeLib;
 using ModSettings;
 using System.Collections;
+using System.IO;
+using System.Collections.Generic;
 
 namespace StickPick
 {
@@ -15,13 +17,15 @@ namespace StickPick
     {
 		public static GameObject playerObject;
 		public static int layerMask = 0;
-
-		public static int stoneCounter = 0, stickCounter = 0;
+		public static int stoneCounter = 0, stickCounter = 0, customCounter = 0;
+		public static List<string> customItems = new List<string>();
 
 		public override void OnApplicationStart()
         {
 			layerMask |= 1 << 17; // gear layer		
 			StickPick.Settings.OnLoad();
+
+			loadCustomItemList();			
 		}
 
 		public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -41,7 +45,7 @@ namespace StickPick
 					GearItem foundItem = foo.transform.gameObject.GetComponent<GearItem>();
 
 					if(foundItem && foundItem.enabled)
-					{	
+					{				
 						if (foundItem.m_GearName.Contains("GEAR_Stick") && !foundItem.m_InPlayerInventory && (Settings.options.pickupChoice == 0 || Settings.options.pickupChoice == 2))
 						{
 							GameAudioManager.PlaySound(foundItem.m_PutBackAudio, InterfaceManager.GetSoundEmitter());
@@ -54,12 +58,19 @@ namespace StickPick
 							GameAudioManager.PlaySound(foundItem.m_PutBackAudio, InterfaceManager.GetSoundEmitter());
 							GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(foundItem, false, true);
 							stoneCounter++;
-						}					
+						}
+
+						if (customItems.Contains(foundItem.m_GearName) && !foundItem.m_InPlayerInventory && Settings.options.pickUpAdditionalItems == true)
+						{
+							GameAudioManager.PlaySound(foundItem.m_PutBackAudio, InterfaceManager.GetSoundEmitter());
+							GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(foundItem, false, true);
+							customCounter++;
+						}
 					}
 				}
 
 				int calorieCost = 0;
-				int itemCount = stoneCounter + stoneCounter;
+				int itemCount = stoneCounter + stoneCounter + customCounter;
 
 				if( itemCount!=0 && Settings.options.calorieCost != 0)
 				{
@@ -67,9 +78,34 @@ namespace StickPick
 					GameManager.GetHungerComponent().RemoveReserveCalories(calorieCost);
 				}						
 					
-				MelonLogger.Msg("Picked up " + stickCounter + " sticks and " + stoneCounter + " stones in radius of " + Settings.options.pickupRadius + " meter and spent " + (Settings.options.calorieCost * sphereTargethit.Length) + " calories!");
+				MelonLogger.Msg("Picked up " + stickCounter + " sticks and " + stoneCounter + " stones in radius of " + Settings.options.pickupRadius + " meter and spent " + calorieCost + " calories.");
+				
+				if(Settings.options.pickUpAdditionalItems)
+				{
+					MelonLogger.Msg("Oh and " + customCounter + " items from your custom list also!");
+				}			
+
+				customCounter = 0;
 				stoneCounter = 0;
 				stickCounter = 0;				
+			}
+		}
+
+		public static void loadCustomItemList()
+		{
+			customItems.Clear();
+
+			if (File.Exists("Mods\\StickPickCustomList.txt") && Settings.options.pickUpAdditionalItems)
+			{
+				using (StreamReader sr = File.OpenText("Mods\\StickPickCustomList.txt"))
+				{
+					while (!sr.EndOfStream)
+					{
+						customItems.Add(sr.ReadLine());
+					}
+				}
+
+				MelonLogger.Msg("Loaded custom list with " + customItems.Count + " items");
 			}
 		}
 	}
