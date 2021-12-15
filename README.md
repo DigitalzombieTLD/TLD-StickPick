@@ -1,4 +1,4 @@
-The Long Dark - TLD StickPick mod - v1.1.0 by Digitalzombie
+The Long Dark - TLD StickPick mod - v1.1.2 by Digitalzombie
 ===========================================================
 
 How to install:
@@ -28,14 +28,19 @@ You can configure the size of the radius,
 the calorie penalty for picking up items,
 and choose if only sticks / stones or both get picked up.
 
-In addition you can modify the "StickPickCustomList.txt"
-to add custom items that get picked up. 
-One item per line, no spaces.
+In addition you can put a "StickPickCustomList.txt" file in your Mods folder,
+to add custom items that get picked up. One item per line, no spaces!
+
+eg.
+GEAR_Arrow
+GEAR_ArrowHead
+GEAR_ArrowShaft
 
 Use the following list:
 https://the-long-dark-modding.fandom.com/wiki/Gear_Name
 
-Note: Not all items from that list are getting picked up.
+Note: 
+Not all items from that list are getting picked up. Only items that are actually on the "GEAR" object layer (17).
 Please report any items that don't work.
 
 ===========================
@@ -58,6 +63,8 @@ https://discord.gg/AqpW9TjUfr
 
 Changelog:
 ==========
+1.1.2	- Fixed issues with AutoUpdate in release
 1.1.0 	- Added custom item list
-		    - Higher radius setting
+	- Higher radius setting
+		    
 1.0.0 	- First release
