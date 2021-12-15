@@ -103,8 +103,9 @@ namespace StickPick
 					{
 						customItems.Add(sr.ReadLine());
 					}
+					sr.Close();
 				}
-
+				
 				MelonLogger.Msg("Loaded custom list with " + customItems.Count + " items");
 			}
 		}
