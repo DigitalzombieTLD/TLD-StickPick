@@ -1,4 +1,4 @@
-The Long Dark - TLD StickPick mod - v1.1.2 by Digitalzombie
+The Long Dark - TLD StickPick mod - v1.2.0 by Digitalzombie
 ===========================================================
 
 How to install:
@@ -63,6 +63,9 @@ https://discord.gg/AqpW9TjUfr
 
 Changelog:
 ==========
+1.2.0	- Fixed: Calorie cost now actually working
+	- Added: New feature; skip inspect on manual pick up of items
+	
 1.1.2	- Fixed issues with AutoUpdate in release
 1.1.0 	- Added custom item list
 	- Higher radius setting
