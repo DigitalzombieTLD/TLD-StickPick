@@ -9,11 +9,11 @@ namespace StickPick
     {    
         [Section("Keybind")]
 
-		[Name("Pick up sticks")]
-		[Description("pickSticks")]
+		[Name("Pick up")]
+		[Description("Pick up items in radius around you")]
 		public UnityEngine.KeyCode buttonPickSticks = KeyCode.LeftAlt;
 
-		[Section("Other settings")]
+		[Section("General")]
 
 		[Name("What to pick")]
 		[Description("Choose between stick, stones or sticks & stones")]
@@ -30,11 +30,19 @@ namespace StickPick
 		[Slider(0, 25)]
 		public int calorieCost = 5;
 
-		[Section("Additional items")]
-
 		[Name("Enable custom item list")]
 		[Description("Picks up any (valid) item listed in the StickPickCustomList.txt")]
 		public bool pickUpAdditionalItems = false;
+
+		[Section("Other")]
+
+		[Name("(Manual) Instant pick up")]
+		[Description("Skips inspection on (manual) pick up and puts item directly into your inventory (sticks/stones)")]
+		public bool skipInspect = false;
+
+		[Name("Skip every item inspection")]
+		[Description("Skips inspection on (manual) pick up for all \"GEAR_\" items (Warning: untested!)")]
+		public bool skipInspectAll = false;
 
 		protected override void OnConfirm()
         {

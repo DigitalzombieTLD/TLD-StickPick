@@ -70,11 +70,11 @@ namespace StickPick
 				}
 
 				int calorieCost = 0;
-				int itemCount = stoneCounter + stoneCounter + customCounter;
+				int itemCount = stickCounter + stoneCounter + customCounter;
 
 				if( itemCount!=0 && Settings.options.calorieCost != 0)
 				{
-					calorieCost = calorieCost * Settings.options.calorieCost;
+					calorieCost = itemCount * Settings.options.calorieCost;
 					GameManager.GetHungerComponent().RemoveReserveCalories(calorieCost);
 				}						
 					
