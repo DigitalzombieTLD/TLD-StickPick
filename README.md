@@ -43,7 +43,6 @@ Note:
 Not all items from that list are getting picked up. Only items that are actually on the "GEAR" object layer (17).
 Please report any items that don't work.
 
-===========================================================
 PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 ===========================================================
 
