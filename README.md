@@ -44,25 +44,13 @@ Not all items from that list are getting picked up. Only items that are actually
 Please report any items that don't work.
 
 ===========================
-===========================
-
-BUGS ARE TO BE EXPECTED!!!
-===========================
-
-Keep yourself up to date on the progress on:
-https://www.youtube.com/c/DigitalzombieDev
-
-Or on the TLD reddit:
-https://www.reddit.com/r/thelongdark/
-
-Or on Discord:
-https://discord.gg/AqpW9TjUfr
-
-===========================
+PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 ===========================
 
 Changelog:
 ==========
+1.2.1	- Fixed: Bug that made some users unable to pick up items in cooking slots with "Skip every item inspection" enabled
+	- Primadonna now handling mod development and support.
 1.2.0	- Fixed: Calorie cost now actually working
 	- Added: New feature; skip inspect on manual pick up of items
 	
@@ -71,3 +59,16 @@ Changelog:
 	- Higher radius setting
 		    
 1.0.0 	- First release
+===========================
+
+Check out the OG Dev's Youtube Channel
+https://www.youtube.com/c/DigitalzombieDev
+
+TLD reddit:
+https://www.reddit.com/r/thelongdark/
+
+And the modding Discord:
+https://discord.gg/AqpW9TjUfr
+
+===========================
+===========================
