@@ -7,10 +7,10 @@ using StickPick;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: MelonInfo(typeof(StickPick_Main), "StickPick", "1.2.0", "Digitalzombie", "")]
+[assembly: MelonInfo(typeof(StickPick_Main), "StickPick", "1.2.1", "Primadonna", "")]
 [assembly: MelonGame("Hinterland", "TheLongDark")]
 [assembly: AssemblyTitle("StickPick")]
-[assembly: AssemblyDescription("Sticks and stones may break my bones ... but not my back anymore.")]
+[assembly: AssemblyDescription("Sticks and stones may break my bones ... but not my back anymore. Created by Digitalzombie and maintained/supported by Primadonna.")]
 [assembly: AssemblyCompany("Digitalzombie")]
 [assembly: AssemblyProduct("StickPick")]
 

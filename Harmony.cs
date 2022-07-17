@@ -1,6 +1,6 @@
 ﻿using System;
 using MelonLoader;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 using System.Reflection;
 using System.Xml.XPath;
@@ -18,13 +18,14 @@ namespace StickPick
 	{
 		public static bool Prefix(ref PlayerManager __instance)
 		{
-			if(Settings.options.skipInspect && __instance.m_InteractiveObjectUnderCrosshair != null)
+			GearItem gearitem = __instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>();
+			if (Settings.options.skipInspect && __instance.m_InteractiveObjectUnderCrosshair != null)
 			{
 				if(Settings.options.skipInspectAll)
 				{
-					if(__instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_")&&!__instance.m_InteractiveObjectUnderCrosshair.name.Contains("CardGame"))
+					if(__instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_")&&!__instance.m_InteractiveObjectUnderCrosshair.name.Contains("CardGame")&& !gearitem.IsAttachedToPlacePoint())
 					{
-						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(__instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>(), false, false);
+						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(gearitem, false, false);
 						return false;
 					}
 				}
@@ -32,7 +33,7 @@ namespace StickPick
 				{
 					if(__instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_Stick")|| __instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_Stone"))
 					{
-						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(__instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>(), false, false);
+						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(gearitem, false, false);
 						return false;
 					}
 				}
