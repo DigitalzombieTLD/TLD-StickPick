@@ -81,5 +81,3 @@ https://www.reddit.com/r/thelongdark/
 
 And the modding Discord:
 https://discord.gg/AqpW9TjUfr
-
-===========================
