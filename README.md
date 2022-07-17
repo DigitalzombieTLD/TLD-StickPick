@@ -53,25 +53,25 @@ Changelog:
 ==========
 - Fixed: Bug that made some users unable to pick up items in cooking slots with "Skip every item inspection" enabled
 - Primadonna now handling mod development and support.
-==========
+
 1.2.0	
 ==========
 - Fixed: Calorie cost now actually working	
 - Added: New feature; skip inspect on manual pick up of items
-==========
+
 1.1.2
 ==========
 - Fixed: issues with AutoUpdate in release
-==========
+
 1.1.0
 ==========
 - Added custom item list
 - Higher radius setting
-==========
+
 1.0.0
 ==========
 - First Release
-==========
+
 
 Check out the OG Dev's Youtube Channel
 https://www.youtube.com/c/DigitalzombieDev
