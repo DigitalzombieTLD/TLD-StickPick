@@ -1,4 +1,4 @@
-The Long Dark - TLD StickPick mod - v1.2.0 by Digitalzombie
+The Long Dark - TLD StickPick mod - v1.2.1 by Digitalzombie and Primadonna
 ===========================================================
 
 How to install:
