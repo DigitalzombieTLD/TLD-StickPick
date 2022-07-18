@@ -47,6 +47,11 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+1.2.2
+==========
+- Fixed: Null Pointer Exceptions on launch
+- Changed: Notes now show inspection menu.
+
 1.2.1
 ==========
 - Fixed: Bug that made some users unable to pick up items in cooking slots with "Skip every item inspection" enabled
