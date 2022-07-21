@@ -1,15 +1,5 @@
-﻿using System;
+﻿using HarmonyLib;
 using MelonLoader;
-using HarmonyLib;
-using UnityEngine;
-using System.Reflection;
-using System.Xml.XPath;
-using System.Globalization;
-using UnhollowerRuntimeLib;
-using ModSettings;
-using System.Collections;
-using System.IO;
-using System.Collections.Generic;
 
 namespace StickPick
 {
@@ -18,12 +8,14 @@ namespace StickPick
 	{
 		public static bool Prefix(ref PlayerManager __instance)
 		{
-			GearItem gearitem = __instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>();
-			if (Settings.options.skipInspect && __instance.m_InteractiveObjectUnderCrosshair != null)
+			GearItem gearitem = new GearItem();
+			if (__instance.m_InteractiveObjectUnderCrosshair != null) { gearitem = __instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>(); }
+			bool allowedtoskip = gearitem != null && !gearitem.IsAttachedToPlacePoint() && gearitem.m_NarrativeCollectibleItem == null && (gearitem.m_Bed == null);
+			if (Settings.options.SkipInspectChoice != 0 && __instance.m_InteractiveObjectUnderCrosshair != null)
 			{
-				if(Settings.options.skipInspectAll)
+				if (Settings.options.SkipInspectChoice == 1)
 				{
-					if(__instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_")&&!__instance.m_InteractiveObjectUnderCrosshair.name.Contains("CardGame")&& !gearitem.IsAttachedToPlacePoint())
+					if (__instance.m_InteractiveObjectUnderCrosshair.name.Contains("GEAR_") && !__instance.m_InteractiveObjectUnderCrosshair.name.Contains("CardGame") && gearitem != null && allowedtoskip)
 					{
 						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(gearitem, false, false);
 						return false;
