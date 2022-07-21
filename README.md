@@ -47,6 +47,10 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+1.2.3
+==========
+- Fixed: issue where bedrolls were unusable with skip inspection menu enabled
+
 1.2.2
 ==========
 - Fixed: Null Pointer Exceptions on launch
