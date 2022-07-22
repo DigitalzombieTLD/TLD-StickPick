@@ -35,6 +35,11 @@ namespace StickPick
 
 		public override void OnUpdate()
 		{
+			if (Settings.options.SkipBeds && InterfaceManager.m_Panel_Rest.IsEnabled())
+			{
+				InterfaceManager.m_Panel_Rest.DoRest(12, true);
+				InterfaceManager.m_Panel_Rest.Enable(false);
+			}
 			if (InputManager.GetKeyDown(InputManager.m_CurrentContext, Settings.options.buttonPickSticks)) 
 			{				
 				RaycastHit[] sphereTargethit;
@@ -67,6 +72,7 @@ namespace StickPick
 							customCounter++;
 						}
 					}
+
 				}
 
 				int calorieCost = 0;

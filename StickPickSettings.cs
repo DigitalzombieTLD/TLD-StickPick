@@ -7,11 +7,6 @@ namespace StickPick
 {
     internal class StickPickSettingsMain : JsonModSettings
     {    
-        [Section("Keybind")]
-
-		[Name("Pick up")]
-		[Description("Pick up items in radius around you")]
-		public UnityEngine.KeyCode buttonPickSticks = KeyCode.LeftAlt;
 
 		[Section("Skip Item Inspection Menu")]
 
@@ -19,6 +14,14 @@ namespace StickPick
 		[Description("Choose which items(if any) to skip inspection menu on.")]
 		[Choice("None", "All", "Sticks and stones")]
 		public int SkipInspectChoice = 0;
+
+		[Name("Skip Inspection on Notes")]
+		[Description("Put notes straight into inventory without a chance to read them first.")]
+		public bool SkipNotes = false;
+
+		[Name("Skip Inspection on Beds")]
+		[Description("Always Sleep until Fully Rested.")]
+		public bool SkipBeds = true;
 
 		[Section("Stickpick")]
 
@@ -40,6 +43,12 @@ namespace StickPick
 		[Name("Enable custom item list")]
 		[Description("Picks up any (valid) item listed in the StickPickCustomList.txt")]
 		public bool pickUpAdditionalItems = false;
+
+		[Section("Keybind")]
+
+		[Name("Pick up")]
+		[Description("Pick up items in radius around you")]
+		public UnityEngine.KeyCode buttonPickSticks = KeyCode.LeftAlt;
 
 		protected override void OnConfirm()
         {

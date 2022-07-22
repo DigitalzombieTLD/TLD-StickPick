@@ -10,7 +10,8 @@ namespace StickPick
 		{
 			GearItem gearitem = new GearItem();
 			if (__instance.m_InteractiveObjectUnderCrosshair != null) { gearitem = __instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>(); }
-			bool allowedtoskip = gearitem != null && !gearitem.IsAttachedToPlacePoint() && gearitem.m_NarrativeCollectibleItem == null && (gearitem.m_Bed == null);
+			bool allowedtoskip = gearitem != null && !gearitem.IsAttachedToPlacePoint() && (gearitem.m_Bed == null);
+			allowedtoskip = allowedtoskip && !Settings.options.SkipNotes && gearitem.m_NarrativeCollectibleItem == null;
 			if (Settings.options.SkipInspectChoice != 0 && __instance.m_InteractiveObjectUnderCrosshair != null)
 			{
 				if (Settings.options.SkipInspectChoice == 1)
