@@ -1,4 +1,4 @@
-The Long Dark - QuickPick Version 2.0.0 by Primadonna and Digitalzombie
+The Long Dark - QuickPick Version 2.1.0 by Primadonna and Digitalzombie
 ===========================================================
 
 How to install:
@@ -43,6 +43,12 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+2.1.0
+==========
+- Fixed issue introduced in last update which broke the custom item list.
+- New Feature: Blacklist, if enabled, will pick up all items except ones on the list.
+- New Feature: Enable Aoe Pickup for items you have dropped.
+
 2.0.0
 ==========
 - Now known as Quickpick! Future Development will be more oriented improving the UI for picking up items, with less of an emphasis on sticks.
