@@ -18,7 +18,7 @@ namespace QuickPick
 		public static GameObject playerObject;
 		public static int layerMask = 0;
 		public static int stoneCounter = 0, stickCounter = 0, customCounter = 0;
-		public static List<string> customItems = new List<string>();
+		public static List<string> CustomList = new List<string>();
 
 
 
@@ -46,13 +46,32 @@ namespace QuickPick
 			if (Settings.options.EnableMod && Settings.options.Allow_AoE) return Settings.options.pickupRadius;
 			else return .001f;
 		}	
+
+		bool ValidFromList(GearItem item)
+        {
+			MelonLogger.Msg("is item null?: " + item == null);
+			if(item == null) return false;
+			MelonLogger.Msg("item: " + item.name);
+			MelonLogger.Msg("is customlist null or empty?: " + (CustomList == null || CustomList.Count == 0));
+			if (CustomList == null || CustomList.Count == 0) return true;
+			bool result = CustomList.Contains(item.m_GearName);
+			MelonLogger.Msg("list type: " + Settings.options.ListType.ToString());
+			MelonLogger.Msg("item on list?: " + result);
+			if (Settings.options.ListType == 0) return result;
+			return !result;
+		}
+
+		bool Dropped(GearItem item)
+        {
+			return (Settings.options.PickDrop && item.m_BeenInPlayerInventory);
+        }
 		
 		void pickupitem(GearItem foundItem)
         {
 			if(foundItem != null)
             {
 				bool allowedtopick = false;
-				if (Settings.options.pickupChoice == 0 || (Settings.options.pickupChoice == 1 && foundItem.name.Contains("GEAR_Stick")) || ((Settings.options.pickupChoice == 2 && customItems.Contains(foundItem.m_GearName))))
+				if (Settings.options.pickupChoice == 0 || Dropped(foundItem) || (Settings.options.pickupChoice == 1 && foundItem.name.Contains("GEAR_Stick")) || ((Settings.options.pickupChoice == 2 && ValidFromList(foundItem))))
 				{
 					allowedtopick = true;
 				}
@@ -98,13 +117,12 @@ namespace QuickPick
 		{
 			layerMask |= 1 << 17; // gear layer		
 			QuickPick.Settings.OnLoad();
-
 			loadCustomItemList();
 		}
 		public static void loadCustomItemList()
 		{
-			customItems.Clear();
-			if (Settings.options.pickupChoice == 2 && !File.Exists("Mods\\QuickPickCustomList.txt"))
+			CustomList.Clear();
+			if (!File.Exists("Mods\\QuickPickCustomList.txt"))
             {
 				if (File.Exists("Mods\\StickPickCustomList.txt")) File.Move("Mods\\StickPickCustomList.txt", "Mods\\QuickPickCustomList.txt");
 				else File.Create("Mods\\QuickPickCustomList.txt");
@@ -115,20 +133,20 @@ namespace QuickPick
 				{
 					while (!sr.EndOfStream)
 					{
-						customItems.Add(sr.ReadLine());
+						CustomList.Add(sr.ReadLine());
 					}
 					sr.Close();
 				}
 
 			}
 
-			if (File.Exists("Mods\\StickPickCustomList.txt") && Settings.options.pickupChoice==2)
+			if (File.Exists("Mods\\QuickPickCustomList.txt"))
 			{
-				using (StreamReader sr = File.OpenText("Mods\\StickPickCustomList.txt"))
+				using (StreamReader sr = File.OpenText("Mods\\QuickPickCustomList.txt"))
 				{
 					while (!sr.EndOfStream)
 					{
-						customItems.Add(sr.ReadLine());
+						CustomList.Add(sr.ReadLine());
 					}
 					sr.Close();
 				}

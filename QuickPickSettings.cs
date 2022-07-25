@@ -22,6 +22,7 @@ namespace QuickPick
 		[Description("Put notes straight into inventory without a chance to read them first.")]
 		public bool SkipNotes = false;
 
+
 		[Section("AoE Pickup")]
 
 		[Name("Enable AoE Pickup")]
@@ -38,10 +39,21 @@ namespace QuickPick
 		[Slider(0, 25)]
 		public int calorieCost = 2;
 
-		[Name("AoE Item Filter")]
+		[Section("Item Filtering")]
+
+		[Name("Items to Pick")]
 		[Description("Choose which items around you will be picked up.")]
 		[Choice("All", "Only Sticks", "Custom List")]
 		public int pickupChoice = 0;
+
+		[Name("Quick Pickup Dropped Items")]
+		[Description("Items you have dropped will be picked up regardless of filters.")]
+		public bool PickDrop = false;
+
+		[Name("Custom List Type")]
+		[Description("Choose whether the item list(in mods folder) acts as a blacklist or whitelist.")]
+		[Choice("Whitelist", "Blacklist")]
+		public int ListType = 0;
 
 
 
@@ -60,7 +72,9 @@ namespace QuickPick
 				field.Name == nameof(Allow_AoE) ||
 				field.Name == nameof(pickupRadius) ||
 				field.Name == nameof(calorieCost) ||
-				field.Name == nameof(pickupChoice))
+				field.Name == nameof(pickupChoice) ||
+				field.Name == nameof(ListType) ||
+				field.Name == nameof(PickDrop))
 			{
 				RefreshFields();
 			}
@@ -75,6 +89,8 @@ namespace QuickPick
 			SetFieldVisible(nameof(pickupRadius), Settings.options.EnableMod && Settings.options.Allow_AoE);
 			SetFieldVisible(nameof(calorieCost), Settings.options.EnableMod && Settings.options.Allow_AoE);
 			SetFieldVisible(nameof(pickupChoice), Settings.options.EnableMod &&Settings.options.Allow_AoE);
+			SetFieldVisible(nameof(ListType), Settings.options.EnableMod && Settings.options.Allow_AoE && pickupChoice == 2);
+			SetFieldVisible(nameof(PickDrop), Settings.options.EnableMod && Settings.options.Allow_AoE && pickupChoice != 0);
 		}
 	}
 
@@ -87,7 +103,7 @@ namespace QuickPick
         public static void OnLoad()
         {
             options = new QuickPickSettingsMain();
-            options.AddToModSettings("QuickPick Settings");
+            options.AddToModSettings("QuickPick");
 			QuickPick_Main.loadCustomItemList();
 			options.RefreshFields();
 		}
