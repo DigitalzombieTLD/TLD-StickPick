@@ -1,4 +1,4 @@
-The Long Dark - TLD StickPick mod - v1.2.1 by Digitalzombie and Primadonna
+The Long Dark - QuickPick Version 2.0.0 by Primadonna and Digitalzombie
 ===========================================================
 
 How to install:
@@ -21,13 +21,9 @@ You can find everything on: https://xpazeman.com/tld-mod-list/
 What does it do?
 =================
 
-Picks up sticks and stones in a radius around you.
+Allows for picking up more items quicker. You can skip the inspect menu to pick items up with one click, and pick up items in an AoE.
 
-You can configure the size of the radius, 
-the calorie penalty for picking up items,
-and choose if only sticks / stones or both get picked up.
-
-In addition you can put a "StickPickCustomList.txt" file in your Mods folder,
+In addition you can put a "QuickPickCustomList.txt" file in your Mods folder,
 to add custom items that get picked up. One item per line, no spaces!
 
 eg.
@@ -47,6 +43,12 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+2.0.0
+==========
+- Now known as Quickpick! Future Development will be more oriented improving the UI for picking up items, with less of an emphasis on sticks.
+- Major Code Overhaul
+- Options Page Redesign
+
 1.2.3
 ==========
 - Fixed: issue where bedrolls were unusable with skip inspection menu enabled
