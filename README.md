@@ -43,6 +43,10 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+2.1.1
+==========
+ - fixed issue where Quick Pickup Dropped items feature would pick up items in cooking slots.
+ - you can now click and hold in order to pick up items as you walk along
 2.1.0
 ==========
 - Fixed issue introduced in last update which broke the custom item list.
