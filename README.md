@@ -1,4 +1,4 @@
-The Long Dark - QuickPick Version 2.1.0 by Primadonna and Digitalzombie
+The Long Dark - QuickPick Version 2.2.1 by Primadonna and Digitalzombie
 ===========================================================
 
 How to install:
