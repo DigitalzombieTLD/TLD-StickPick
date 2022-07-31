@@ -43,7 +43,10 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
-2.2
+2.2.1
+==========
+ - fixed issue where calorie cost would increase as more items were picked up
+2.2.0
 ==========
  - added aoe hotkey options
 2.1.1
