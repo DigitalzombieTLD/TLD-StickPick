@@ -32,6 +32,13 @@ namespace QuickPick
 			return false;
 		}
 		
+		bool mousedown = false;
+			void UpdateMouse()
+        {
+			if(pickingup()) mousedown = true;
+			if(InputManager.GetFireReleased(InputManager.m_CurrentContext)) mousedown = false;
+
+		}
 		public static bool NoClickHold()
         {
 			if (GameManager.Instance() == null) return false;
@@ -49,14 +56,9 @@ namespace QuickPick
 
 		bool ValidFromList(GearItem item)
         {
-			MelonLogger.Msg("is item null?: " + item == null);
 			if(item == null) return false;
-			MelonLogger.Msg("item: " + item.name);
-			MelonLogger.Msg("is customlist null or empty?: " + (CustomList == null || CustomList.Count == 0));
 			if (CustomList == null || CustomList.Count == 0) return true;
 			bool result = CustomList.Contains(item.m_GearName);
-			MelonLogger.Msg("list type: " + Settings.options.ListType.ToString());
-			MelonLogger.Msg("item on list?: " + result);
 			if (Settings.options.ListType == 0) return result;
 			return !result;
 		}
@@ -70,8 +72,11 @@ namespace QuickPick
         {
 			if(foundItem != null)
             {
+
+				bool notcooking = !foundItem.IsAttachedToPlacePoint();
+				bool dropped = Settings.options.PickDrop && Dropped(foundItem) && notcooking;
 				bool allowedtopick = false;
-				if (Settings.options.pickupChoice == 0 || Dropped(foundItem) || (Settings.options.pickupChoice == 1 && foundItem.name.Contains("GEAR_Stick")) || ((Settings.options.pickupChoice == 2 && ValidFromList(foundItem))))
+				if (Settings.options.pickupChoice == 0 || dropped || (Settings.options.pickupChoice == 1 && foundItem.name.Contains("GEAR_Stick")) || ((Settings.options.pickupChoice == 2 && ValidFromList(foundItem))))
 				{
 					allowedtopick = true;
 				}
@@ -87,11 +92,26 @@ namespace QuickPick
 			}
 		}
 		
+		bool AoE_On()
+        {
+			if(Settings.options.AllowClick)
+            {
+				UpdateMouse();
+				if (mousedown) return true;
+			}
+			if(Settings.options.AllowKey)
+            {
+				return InputManager.GetKeyDown(InputManager.m_CurrentContext, Settings.options.KeyBind);
+
+			}
+			return false;
+        }
+		
 		GearItem gearitem = new GearItem();
 		int itemcount;
 		public override void OnUpdate()
 		{
-			if (pickingup())
+			if (AoE_On())
 			{
 				RaycastHit[] sphereTargethit;
 				sphereTargethit = Physics.SphereCastAll(GameManager.GetVpFPSPlayer().transform.position, pickupradius(), GameManager.GetVpFPSPlayer().transform.TransformDirection(Vector3.down), GameManager.GetVpFPSPlayer().Controller.m_Controller.height * 0.8f, layerMask);
@@ -108,6 +128,7 @@ namespace QuickPick
 					calorieCost = itemcount * Settings.options.calorieCost;
 					GameManager.GetHungerComponent().RemoveReserveCalories(calorieCost);
 				}
+				itemcount = 0;
 
 			}
 
