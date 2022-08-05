@@ -47,7 +47,7 @@ namespace QuickPick
 			if (__instance.m_InteractiveObjectUnderCrosshair != null) { gearitem = __instance.m_InteractiveObjectUnderCrosshair.GetComponent<GearItem>(); }
 			bool NotonCookingSlot = gearitem != null && !gearitem.IsAttachedToPlacePoint();
 			bool allowedtoskip = NotonCookingSlot && (gearitem.m_Bed == null) && !Settings.options.SkipNotes && gearitem.m_NarrativeCollectibleItem == null;
-			if (Settings.options.EnableMod && Settings.options.SkipMenu && __instance.m_InteractiveObjectUnderCrosshair != null)
+			if (Settings.options.EnableMod && QuickPick_Main.AllowSkip(gearitem) && __instance.m_InteractiveObjectUnderCrosshair != null)
 			{
 
 				if (Settings.options.pickupChoice == 1)

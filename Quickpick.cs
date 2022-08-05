@@ -54,7 +54,7 @@ namespace QuickPick
 			else return .001f;
 		}	
 
-		bool ValidFromList(GearItem item)
+		static bool ValidFromList(GearItem item)
         {
 			if(item == null) return false;
 			if (CustomList == null || CustomList.Count == 0) return true;
@@ -63,32 +63,31 @@ namespace QuickPick
 			return !result;
 		}
 
-		bool Dropped(GearItem item)
+		static bool Dropped(GearItem item)
         {
-			return (Settings.options.PickDrop && item.m_BeenInPlayerInventory);
+			return (Settings.options.PickDrop && item.m_Cookable == null && !item.IsAttachedToPlacePoint()&& item.m_BeenInPlayerInventory);
         }
+
+		static bool AllowedToPick(GearItem item)
+		{
+			if (item != null && item && item.enabled)
+			{
+				if (Settings.options.pickupChoice == 0 || Dropped(item)) return true;
+				if (Settings.options.pickupChoice == 1 && item.name.Contains("GEAR_Stick")) return true;
+				if (Settings.options.pickupChoice == 3 && ValidFromList(item)) return true;
+			}
+			return false;
+		}
+
+		public static bool AllowSkip(GearItem item) { return Settings.options.SkipMenu || (Settings.options.EnableMod && Settings.options.Allow_AoE && Settings.options.PickOverride && AllowedToPick(item)); }
 		
 		void pickupitem(GearItem foundItem)
         {
-			if(foundItem != null)
-            {
-
-				bool notcooking = !foundItem.IsAttachedToPlacePoint();
-				bool dropped = Settings.options.PickDrop && Dropped(foundItem) && notcooking;
-				bool allowedtopick = false;
-				if (Settings.options.pickupChoice == 0 || dropped || (Settings.options.pickupChoice == 1 && foundItem.name.Contains("GEAR_Stick")) || ((Settings.options.pickupChoice == 2 && ValidFromList(foundItem))))
-				{
-					allowedtopick = true;
-				}
-				if (foundItem && foundItem.enabled)
-				{
-					if (allowedtopick && !foundItem.m_InPlayerInventory)
-					{
-						GameAudioManager.PlaySound(foundItem.m_PutBackAudio, InterfaceManager.GetSoundEmitter());
-						GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(foundItem, false, true);
-						itemcount++;
-					}
-				}
+			if (AllowedToPick(foundItem) && !foundItem.m_InPlayerInventory)
+			{
+				GameAudioManager.PlaySound(foundItem.m_PutBackAudio, InterfaceManager.GetSoundEmitter());
+				GameManager.GetPlayerManagerComponent().ProcessPickupItemInteraction(foundItem, false, true);
+				itemcount++;
 			}
 		}
 		

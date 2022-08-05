@@ -1,0 +1,15 @@
+﻿{
+	"EnableMod": true,
+	"SkipMenu": false,
+	"SkipNotes": false,
+	"Allow_AoE": true,
+	"AllowClick": true,
+	"AllowKey": false,
+	"KeyBind": "LeftAlt",
+	"pickupRadius": 3.031416,
+	"calorieCost": 1,
+	"pickupChoice": 2,
+	"PickOverride": true,
+	"PickDrop": true,
+	"ListType": 0
+}
