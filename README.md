@@ -1,4 +1,4 @@
-The Long Dark - QuickPick Version 2.3.0 by Primadonna and Digitalzombie
+The Long Dark - QuickPick Version 2.3.1 by Primadonna and Digitalzombie
 ===========================================================
 
 How to install:
@@ -43,6 +43,11 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+
+2.3.1
+==========
+ - fixed custom item list
+ 
 2.3.0
 ==========
  -  Quick Pickup Dropped Items now ignores cookables
