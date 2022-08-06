@@ -1,2 +1,3 @@
 GEAR_Stick
-GEAR_Stone
+GEAR_Coal
+GEAR_Softwood

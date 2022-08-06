@@ -74,7 +74,7 @@ namespace QuickPick
 			{
 				if (Settings.options.pickupChoice == 0 || Dropped(item)) return true;
 				if (Settings.options.pickupChoice == 1 && item.name.Contains("GEAR_Stick")) return true;
-				if (Settings.options.pickupChoice == 3 && ValidFromList(item)) return true;
+				if (Settings.options.pickupChoice == 2 && ValidFromList(item)) return true;
 			}
 			return false;
 		}

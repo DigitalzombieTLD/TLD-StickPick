@@ -1,6 +1,6 @@
 ﻿{
 	"EnableMod": true,
-	"SkipMenu": false,
+	"SkipMenu": true,
 	"SkipNotes": false,
 	"Allow_AoE": true,
 	"AllowClick": true,
@@ -10,6 +10,6 @@
 	"calorieCost": 1,
 	"pickupChoice": 2,
 	"PickOverride": true,
-	"PickDrop": true,
+	"PickDrop": false,
 	"ListType": 0
 }
