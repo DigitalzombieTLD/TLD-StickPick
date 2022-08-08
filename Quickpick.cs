@@ -24,23 +24,23 @@ namespace QuickPick
 
 		bool pickingup()
 		{
-			if ( NoMenuOpen() && NoClickHold() && InterfaceManager.m_Instance != null)
+			if (NoMenuOpen() && NoClickHold() && InterfaceManager.m_Instance != null)
 			{
 				return InputManager.GetFirePressed(InputManager.m_CurrentContext);
 			}
-						
+
 			return false;
 		}
-		
+
 		bool mousedown = false;
-			void UpdateMouse()
-        {
-			if(pickingup()) mousedown = true;
-			if(InputManager.GetFireReleased(InputManager.m_CurrentContext)) mousedown = false;
+		void UpdateMouse()
+		{
+			if (pickingup()) mousedown = true;
+			if (InputManager.GetFireReleased(InputManager.m_CurrentContext)) mousedown = false;
 
 		}
 		public static bool NoClickHold()
-        {
+		{
 			if (GameManager.Instance() == null) return false;
 			if (GameManager.GetPlayerManagerComponent() == null) return false;
 			return !GameManager.GetPlayerManagerComponent().IsClickHoldActive();
@@ -48,29 +48,58 @@ namespace QuickPick
 		bool NoMenuOpen() { return InterfaceManager.m_Instance != null && !InterfaceManager.m_Instance.AnyOverlayPanelEnabled(); }
 
 
-		float pickupradius() 
+		float pickupradius()
 		{
 			if (Settings.options.EnableMod && Settings.options.Allow_AoE) return Settings.options.pickupRadius;
 			else return .001f;
-		}	
+		}
 
 		static bool ValidFromList(GearItem item)
-        {
-			if(item == null) return false;
+		{
+			if (item == null) return false;
 			if (CustomList == null || CustomList.Count == 0) return true;
 			bool result = CustomList.Contains(item.m_GearName);
 			if (Settings.options.ListType == 0) return result;
 			return !result;
 		}
 
+
+	
+
+
+		static bool BlockedPelt(GearItem item)
+        {
+			bool IsPelt()
+			{
+				return
+					item.name.Contains("GEAR_RabbitPelt") ||
+					item.name.Contains("GEAR_WolfPelt") ||
+					item.name.Contains("GEAR_BearHide") ||
+					item.name.Contains("GEAR_MooseHide") && (item.name.EndsWith("e") || item.name.EndsWith("d"));
+			}
+
+			return Settings.options.IgnorePelts && IsPelt();
+		}
+
+		public static bool IsCarcass(GearItem item)
+        {
+			return !Settings.options.SkipBun && item != null && item.m_BodyHarvest != null;
+        }
 		static bool Dropped(GearItem item)
         {
 			return (Settings.options.PickDrop && item.m_Cookable == null && !item.IsAttachedToPlacePoint()&& item.m_BeenInPlayerInventory);
         }
 
+		public static bool IsLitItem(GearItem item) 
+		{ 
+			if (item.m_TorchItem != null) return item.m_TorchItem.IsBurning();
+			if (item.m_FlareItem != null) return item.m_FlareItem.IsBurning();
+			return false;
+		}
+
 		static bool AllowedToPick(GearItem item)
 		{
-			if (item != null && item && item.enabled)
+			if (item != null && item && item.enabled && !IsLitItem(item) && !BlockedPelt(item))
 			{
 				if (Settings.options.pickupChoice == 0 || Dropped(item)) return true;
 				if (Settings.options.pickupChoice == 1 && item.name.Contains("GEAR_Stick")) return true;
@@ -79,7 +108,14 @@ namespace QuickPick
 			return false;
 		}
 
-		public static bool AllowSkip(GearItem item) { return Settings.options.SkipMenu || (Settings.options.EnableMod && Settings.options.Allow_AoE && Settings.options.PickOverride && AllowedToPick(item)); }
+		static bool IsOutdoorsorAllowedIn()
+		{ 
+			if (Settings.options.AoE_Out) return GameManager.GetWeatherComponent() != null && !GameManager.GetWeatherComponent().IsIndoorEnvironment();
+			return true;
+		}
+
+		static bool AllowOverride(GearItem item) { return (Settings.options.EnableMod && Settings.options.Allow_AoE && Settings.options.PickOverride && AllowedToPick(item));}
+		public static bool SkipAllowedorOverridden(GearItem item) { return Settings.options.SkipMenu || AllowOverride(item); }
 		
 		void pickupitem(GearItem foundItem)
         {
@@ -110,7 +146,7 @@ namespace QuickPick
 		int itemcount;
 		public override void OnUpdate()
 		{
-			if (AoE_On())
+			if (AoE_On() && IsOutdoorsorAllowedIn())
 			{
 				RaycastHit[] sphereTargethit;
 				sphereTargethit = Physics.SphereCastAll(GameManager.GetVpFPSPlayer().transform.position, pickupradius(), GameManager.GetVpFPSPlayer().transform.TransformDirection(Vector3.down), GameManager.GetVpFPSPlayer().Controller.m_Controller.height * 0.8f, layerMask);
