@@ -1,4 +1,4 @@
-The Long Dark - QuickPick Version 2.3.1 by Primadonna and Digitalzombie
+The Long Dark - QuickPick Version 2.4.0 by Primadonna and Digitalzombie
 ===========================================================
 
 How to install:
@@ -43,6 +43,13 @@ PLEASE REPORT ALL BUGS TO PRIMADONNA ON THE MODDING DISCORD
 
 Changelog:
 ==========
+
+2.4.0
+==========
+ - skip inspection on notes setting fixed and renamed
+ - lit flares and torches are now ignored by quickpick and aoe settings
+ - option for ignoring carcasses for quickpick added(needs testing)
+ - option for ignoring pelts for aoe pickup added(needs testing)
 
 2.3.1
 ==========
